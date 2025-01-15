@@ -3,15 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "test:coverage": "jest --coverage",
-    "build": "tsc",
-    "clean": "rm -rf dist"
+    "test": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "jest": "^29.7.0",
@@ -23,5 +19,6 @@
     "@types/uuid": "^10.0.0",
     "express": "^4.21.2",
     "uuid": "^11.0.5"
-  }
+  },
+  "description": ""
 }
