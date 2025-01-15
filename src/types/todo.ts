@@ -34,3 +34,19 @@ export class InvalidTodoError extends Error {
   }
 }
 
+export interface TodoRepository {
+  // 新規Todo作成
+  create(dto: CreateTodoDTO): Promise<Todo>;
+  
+  // ID指定でTodo取得
+  findById(id: string): Promise<Todo | null>;
+  
+  // 全Todo取得
+  findAll(): Promise<Todo[]>;
+  
+  // Todo更新
+  update(id: string, dto: UpdateTodoDTO): Promise<Todo>;
+  
+  // Todo削除
+  delete(id: string): Promise<void>;
+}
