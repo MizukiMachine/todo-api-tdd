@@ -27,30 +27,46 @@ describe('TodoService', () => {
 
     test('throws error for title exceeding maximum length', async () => {
       const dto: CreateTodoDTO = {
-        title: 'a'.repeat(101),  // 101文字
-        description: 'Test Description'
+          title: 'a'.repeat(101),  // 101文字
+          description: 'Test Description'
       };
 
-      await expect(service.createTodo(dto)).rejects.toThrow('Title cannot exceed 100 characters');
+      await expect(service.createTodo(dto))
+          .rejects
+          .toThrow('Title cannot exceed 100 characters');
     });
 
     test('throws error for description exceeding maximum length', async () => {
       const dto: CreateTodoDTO = {
-        title: 'Test Todo',
-        description: 'a'.repeat(501)  // 501文字
+          title: 'Test Todo',
+          description: 'a'.repeat(501)  // 501文字
       };
 
-      await expect(service.createTodo(dto)).rejects.toThrow('Description cannot exceed 500 characters');
+      await expect(service.createTodo(dto))
+          .rejects
+          .toThrow('Description cannot exceed 500 characters');
     });
 
-    test('sanitizes HTML in title and description', async () => {
+    test('sanitizes malicious content in title and description', async () => {
       const dto: CreateTodoDTO = {
-        title: '<script>alert("xss")</script>Test Todo',
-        description: '<b>Description</b>'
+          title: '<script>alert("xss")</script>Test Todo<p onclick="alert()">',
+          description: '<b onclick="alert()">Description</b><img src="x" onerror="alert()">'
       };
 
       const todo = await service.createTodo(dto);
+      
+      expect(todo.title).toBe('Test Todo');
+      expect(todo.description).toBe('Description');
+    });
 
+    test('trims whitespace from title and description', async () => {
+      const dto: CreateTodoDTO = {
+          title: '  Test Todo  ',
+          description: '  Description  '
+      };
+
+      const todo = await service.createTodo(dto);
+      
       expect(todo.title).toBe('Test Todo');
       expect(todo.description).toBe('Description');
     });
