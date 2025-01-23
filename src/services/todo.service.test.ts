@@ -1,6 +1,6 @@
 import { TodoService } from './todo.service';
 import { TodoRepository } from '../repositories/todo.repository';
-import { CreateTodoDTO } from '../types';
+import { CreateTodoDTO, UpdateTodoDTO } from '../types';
 
 describe('TodoService', () => {
   let service: TodoService;
@@ -69,6 +69,61 @@ describe('TodoService', () => {
       
       expect(todo.title).toBe('Test Todo');
       expect(todo.description).toBe('Description');
+    });
+  });
+
+  describe('updateTodo', () => {
+    test('updates todo with valid input', async () => {
+      // まず新しいTodoを作成
+      const created = await service.createTodo({
+        title: 'Original Title',
+        description: 'Original Description'
+      });
+
+      const updateDto: UpdateTodoDTO = {
+        title: 'Updated Title',
+        description: 'Updated Description',
+        completed: true
+      };
+
+      const updated = await service.updateTodo(created.id, updateDto);
+
+      expect(updated.title).toBe(updateDto.title);
+      expect(updated.description).toBe(updateDto.description);
+      expect(updated.completed).toBe(true);
+    });
+
+    test('sanitezes and validates updated fields', async () => {
+      const created = await service.createTodo({
+        title: 'Original Title'
+      });
+
+      const updateDto: UpdateTodoDTO = {
+        title: '<script>alert("xss")</script>Updated Title  ',
+        description: '  <b>New</b> Description  '
+      };
+
+      const updated = await service.updateTodo(created.id, updateDto);
+
+      expect(updated.title).toBe('Updated Title');
+      expect(updated.description).toBe('New Description');
+    });
+
+    test('prevents updateing completed todo', async () => {
+      // 完了済のTodoを作成
+      const todo = await service.createTodo({ title: 'Test Todo'});
+      await service.updateTodo(todo.id, { completed: true});
+
+      // 完了済Todoの更新を試みる
+      await expect(
+          service.updateTodo(todo.id, {title: 'New Title'})
+      ).rejects.toThrow('Cannot update completed todo');
+    });
+
+    test('throws error when todo not found', async () => {
+      await expect(
+          service.updateTodo('non-existent-id', {title: 'New Title'})
+      ).rejects.toThrow('Todo not found');
     });
   });
 });
