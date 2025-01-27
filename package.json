@@ -16,13 +16,16 @@
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
     "@types/sanitize-html": "^2.13.0",
+    "@types/supertest": "^6.0.2",
     "@types/uuid": "^10.0.0",
     "jest": "^29.7.0",
+    "supertest": "^7.0.0",
     "ts-jest": "^29.2.5",
     "typescript": "^5.7.3"
   },
   "dependencies": {
     "express": "^4.21.2",
+    "express-validator": "^7.2.1",
     "sanitize-html": "^2.14.0",
     "uuid": "^11.0.5"
   },
