@@ -1,5 +1,5 @@
 import { TodoRepository } from '../repositories/todo.repository';
-import { CreateTodoDTO, Todo, UpdateTodoDTO } from '../types';
+import { CreateTodoDTO, Todo, UpdateTodoDTO, TodoSearchParams } from '../types';
 import sanitizeHtml from 'sanitize-html';
 
 export class TodoService {
@@ -71,6 +71,36 @@ export class TodoService {
         }
 
         return this.repository.update(id, updateData);
+    }
+
+    async findTodos(params: TodoSearchParams): Promise<Todo[]> {
+        // まず全てのTodoを取得
+        const allTodos = await this.repository.findAll();
+
+        // 検索条件に基づいてフィルタリング
+        return allTodos.filter(todo => {
+            // タイトルで検索
+            if (params.title && !todo.title.toLowerCase().includes(
+                params.title.toLowerCase()
+            )) {
+                return false;
+            }
+
+            // 説明文で検索
+            if (params.description && !todo.description?.toLowerCase().includes(
+                params.description.toLowerCase()
+            )) {
+                return false;
+            }
+
+            // 完了状態で検索
+            if (params.completed !== undefined && 
+                todo.completed !== params.completed) {
+                return false;
+            }
+
+            return true;
+        });
     }
 
     private sanitizeText(text: string): string {

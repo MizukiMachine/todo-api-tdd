@@ -19,3 +19,11 @@ export interface UpdateTodoDTO {
   description?: string; // オプショナル 更新したいフィールドのみ
   completed?: boolean; // オプショナル
 }
+
+
+// 検索用
+export interface TodoSearchParams {
+  title?: string;
+  description?: string;
+  completed?: boolean;
+}
