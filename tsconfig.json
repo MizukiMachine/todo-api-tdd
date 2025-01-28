@@ -1,17 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "commonjs",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "declaration": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "target": "es2020",        // モダンなJavaScript機能を使用可能に
+    "module": "commonjs",      // Node.jsでの標準的なモジュールシステム
+    "strict": true,           // 厳格な型チェックを有効化
+    "esModuleInterop": true,  // import文を使いやすく
+    "skipLibCheck": true,     // 型定義ファイルのチェックをスキップ
+    "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字を厳格に
+    "outDir": "./dist",       // コンパイル後のファイル出力先
+    "rootDir": "./src",       // ソースコードのルートディレクトリ
+    "declaration": true,      // 型定義ファイルの生成
+    "experimentalDecorators": true,    // デコレータ機能を有効化
+    "emitDecoratorMetadata": true      // デコレータのメタデータを有効化
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "**/*.test.ts"]
+  "include": ["src/**/*"],    // コンパイル対象のファイル
+  "exclude": ["node_modules", "**/*.test.ts"] // コンパイル対象外のファイル
 }

@@ -1,4 +1,4 @@
-import { body, ValidationChain } from 'express-validator';
+import { body, query, ValidationChain } from 'express-validator';
 
 export const createTodoValidation: ValidationChain[] = [
     body('title')
@@ -12,4 +12,17 @@ export const createTodoValidation: ValidationChain[] = [
     body('description')
         .optional()
         .trim(),
+];
+
+export const getTodosValidation: ValidationChain[] = [
+    query('completed')
+        .optional()
+        .isBoolean()
+        .withMessage('Completed status must be true or false')
+        .toBoolean(),
+    
+    query('search')
+        .optional()
+        .isString()
+        .trim()
 ];

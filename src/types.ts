@@ -9,21 +9,20 @@ export interface Todo {
 
 // 新規Todo作成時に使用するDTO（Data Transfer Object）
 export interface CreateTodoDTO {
-  title: string;   // 必須項目
-  description?: string; // オプショナル
+  title: string;       // 必須項目
+  description?: string;// オプショナル
 }
 
 // Todo更新時に使用するDTO
 export interface UpdateTodoDTO {
-  title?: string;  // オプショナル
-  description?: string; // オプショナル 更新したいフィールドのみ
-  completed?: boolean; // オプショナル
+  title?: string;      // 全てオプショナル
+  description?: string;// 更新したいフィールドのみ
+  completed?: boolean; // 指定可能
 }
 
-
-// 検索用
+// 検索パラメータ
 export interface TodoSearchParams {
-  title?: string;
-  description?: string;
-  completed?: boolean;
+  title?: string;      // タイトルでの部分一致検索
+  description?: string;// 説明文での部分一致検索
+  completed?: boolean; // 完了状態での検索
 }

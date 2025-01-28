@@ -1,20 +1,18 @@
 {
-  "name": "todo-api-tdd",
+  "name": "todo-api-tdd2",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll",
-    "test:coverage": "jest --coverage",
-    "test:ci": "jest --ci",
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "description": "",
   "devDependencies": {
-    "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.10",
     "@types/sanitize-html": "^2.13.0",
     "@types/supertest": "^6.0.2",
     "@types/uuid": "^10.0.0",
@@ -24,10 +22,10 @@
     "typescript": "^5.7.3"
   },
   "dependencies": {
+    "@types/express": "^5.0.0",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
     "sanitize-html": "^2.14.0",
     "uuid": "^11.0.5"
-  },
-  "description": ""
+  }
 }
