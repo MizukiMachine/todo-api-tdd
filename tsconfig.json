@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2020",        // モダンなJavaScript機能を使用可能に
     "module": "commonjs",      // Node.jsでの標準的なモジュールシステム
-    "strict": true,           // 厳格な型チェックを有効化
+    "strict": true,           // 厳格な型チェックを有効
     "esModuleInterop": true,  // import文を使いやすく
     "skipLibCheck": true,     // 型定義ファイルのチェックをスキップ
     "forceConsistentCasingInFileNames": true, // ファイル名の大文字小文字を厳格に

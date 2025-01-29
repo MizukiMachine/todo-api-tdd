@@ -1,6 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  preset: 'ts-jest',          // TypeScriptサポートを有効化
+  preset: 'ts-jest',          // TypeScriptサポートを有効
   testEnvironment: 'node',    // Node.js環境でテストを実行
   roots: ['<rootDir>/src'],   // テストファイルの検索場所
   testMatch: ['**/*.test.ts'], // テストファイルのパターン

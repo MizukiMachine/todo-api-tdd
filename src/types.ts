@@ -1,3 +1,4 @@
+// src/types.ts
 export interface Todo {
   id: string;          // Todoの一意識別子
   title: string;       // Todoのタイトル
